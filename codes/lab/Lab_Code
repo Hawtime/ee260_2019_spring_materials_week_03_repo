@@ -1,0 +1,60 @@
+Code for 1.1:
+module Lab2_1_1(
+     test,
+     seg
+    );
+     
+     
+     input [3:0] test;
+     output [6:0] seg;
+     reg [6:0] seg;
+
+
+    always @(test)
+    begin
+        case (test) //case statement
+            0 : seg = 7'b0000001;
+            1 : seg = 7'b1001111;
+            2 : seg = 7'b0010010;
+            3 : seg = 7'b0000110;
+            4 : seg = 7'b1001100;
+            5 : seg = 7'b0100100;
+            6 : seg = 7'b0100000;
+            7 : seg = 7'b0001111;
+            8 : seg = 7'b0000000;
+            9 : seg = 7'b0000100;
+            default : seg = 7'b1111111; 
+        endcase
+    end
+  endmodule
+
+Code for 3.1:
+module Lab2(
+    input [3:0] a,
+    input [3:0] b,
+    input cin,
+    output [3:0] s,
+    output cout,
+    wire [2:0] w
+    );
+
+
+//Ripple Carry Adder 
+full_adder a1(a[0],b[0],cin,s[0],w[0]);
+full_adder a2(a[1],b[1],w[0],s[1],w[1]);
+full_adder a3(a[2],b[2],w[1],s[2],w[2]);
+full_adder a4(a[3],b[3],w[2],s[3],cout);
+endmodule
+
+//Full Adder Function 
+module full_adder(a, b, cin, s, cout);
+//inputs
+input a,b,cin;
+//output
+output s, cout;
+
+//Full Adder
+assign s=(a^b^cin);
+assign cout=((a&b)|(b&cin)|(cin&a));
+endmodule
+
